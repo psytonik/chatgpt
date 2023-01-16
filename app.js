@@ -32,5 +32,12 @@ client.on('message', async message =>{
 		const { data } = await axios.get('https://v2.jokeapi.dev/joke/Any?type=single');
 		console.log(data.joke)
 		await client.sendMessage(message.from, data.joke)
+	} else if(message.body === String('Bitcoin')){
+		const {data} = await axios.get('https://api.coindesk.com/v1/bpi/currentprice.json');
+		console.log(data.bpi.USD.rate)   ;
+		await client.sendMessage(message.from,`
+		${data.bpi.USD.rate} ${data.bpi.USD.code} -
+		${data.bpi.EUR.rate} ${data.bpi.EUR.code}
+		`);
 	}
 })
